@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Snowflakes } from './components/Snowflakes'
 import { nanoid } from 'nanoid'
 import { Gift } from './components/Gift'
@@ -10,20 +10,20 @@ export interface GiftType {
   quantity: number
 }
 
-const INITIAL_GIFTS = [
-  { id: nanoid(), name: 'Gorra', quantity: 1 },
-  { id: nanoid(), name: 'Camiseta', quantity: 1 },
-  { id: nanoid(), name: 'T.E.G.', quantity: 1 },
-]
-
 function App() {
-  const [giftsList, setGiftsList] = useState<GiftType[]>(INITIAL_GIFTS)
+  const [giftsList, setGiftsList] = useState<GiftType[]>(
+    () => JSON.parse(localStorage.getItem('giftsList')!) || []
+  )
 
   const [giftForm, setGiftForm] = useState<GiftType>({
     name: '',
     id: nanoid(),
     quantity: 1,
   })
+
+  useEffect(() => {
+    localStorage.setItem('giftsList', JSON.stringify(giftsList))
+  }, [giftsList])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
