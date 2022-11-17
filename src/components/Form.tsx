@@ -17,6 +17,7 @@ export const Form = ({ handleSubmit, handleChange, giftForm }: Props) => {
         onChange={handleChange}
         value={giftForm.name}
         required
+        autoFocus
       />
       <button>Agregar</button>
     </form>
