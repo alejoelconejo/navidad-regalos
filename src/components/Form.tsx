@@ -29,6 +29,14 @@ export const Form = ({ handleSubmit, handleChange, giftForm }: Props) => {
         min='1'
         required
       />
+      <input
+        type='text'
+        name='image'
+        className='input-image'
+        placeholder='https://image.png'
+        value={giftForm.image}
+        onChange={handleChange}
+      />
       <button>Agregar</button>
     </form>
   )

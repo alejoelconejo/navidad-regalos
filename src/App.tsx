@@ -8,6 +8,7 @@ export interface GiftType {
   id: string
   name: string
   quantity: number
+  image: string
 }
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     name: '',
     id: nanoid(),
     quantity: 1,
+    image: '',
   })
 
   useEffect(() => {
@@ -43,7 +45,7 @@ function App() {
       return
     }
     setGiftsList((previousList) => [...previousList, giftForm])
-    setGiftForm({ name: '', id: nanoid(), quantity: 1 })
+    setGiftForm({ name: '', id: nanoid(), quantity: 1, image: '' })
   }
 
   return (
@@ -58,12 +60,13 @@ function App() {
         />
         <section className='gifts'>
           {giftsList.length ? (
-            giftsList.map(({ name, id, quantity }) => (
+            giftsList.map(({ name, id, quantity, image }) => (
               <Gift
                 key={id}
                 name={name}
                 id={id}
                 quantity={quantity}
+                image={image}
                 setGiftsList={setGiftsList}
               />
             ))

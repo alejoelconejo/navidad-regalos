@@ -173,6 +173,13 @@ form button {
 .gift-article {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.gift-article img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
 }
 
 .gift-article button {
