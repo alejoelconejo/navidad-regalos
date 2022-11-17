@@ -29,6 +29,14 @@ function App() {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
+    if (
+      giftsList.find(
+        (gift) => gift.name.toLowerCase() === giftForm.name.toLowerCase()
+      )
+    ) {
+      window.alert('El regalo ya está en la lista. ¡Elegí otro!')
+      return
+    }
     setGiftsList((previousList) => [...previousList, giftForm])
     setGiftForm({ name: '', id: nanoid() })
   }
