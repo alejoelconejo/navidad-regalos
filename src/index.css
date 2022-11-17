@@ -132,21 +132,29 @@ main h1 {
 form {
   width: 100%;
   display: flex;
+  gap: 0.5rem;
 }
 
-form input {
+.input-gift {
   flex: 1;
   background: whitesmoke;
-  border-radius: 0.3rem 0 0 0.3rem;
+  border-radius: 0.3rem;
   color: black;
   padding: 0.5rem 1rem;
   font-size: var(--font-gifts);
 }
 
+.input-quantity {
+  background: whitesmoke;
+  color: black;
+  border-radius: 0.3rem;
+  max-width: 3rem;
+}
+
 form button {
   background: green;
   padding: 0.6rem 1rem;
-  border-radius: 0 0.3rem 0.3rem 0;
+  border-radius: 0.3rem;
   text-transform: uppercase;
 }
 

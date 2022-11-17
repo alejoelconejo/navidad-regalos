@@ -7,18 +7,23 @@ import { Form } from './components/Form'
 export interface GiftType {
   id: string
   name: string
+  quantity: number
 }
 
 const INITIAL_GIFTS = [
-  { id: nanoid(), name: 'Gorra' },
-  { id: nanoid(), name: 'Camiseta' },
-  { id: nanoid(), name: 'T.E.G.' },
+  { id: nanoid(), name: 'Gorra', quantity: 1 },
+  { id: nanoid(), name: 'Camiseta', quantity: 1 },
+  { id: nanoid(), name: 'T.E.G.', quantity: 1 },
 ]
 
 function App() {
   const [giftsList, setGiftsList] = useState<GiftType[]>(INITIAL_GIFTS)
 
-  const [giftForm, setGiftForm] = useState<GiftType>({ name: '', id: nanoid() })
+  const [giftForm, setGiftForm] = useState<GiftType>({
+    name: '',
+    id: nanoid(),
+    quantity: 1,
+  })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -38,7 +43,7 @@ function App() {
       return
     }
     setGiftsList((previousList) => [...previousList, giftForm])
-    setGiftForm({ name: '', id: nanoid() })
+    setGiftForm({ name: '', id: nanoid(), quantity: 1 })
   }
 
   return (
@@ -53,8 +58,14 @@ function App() {
         />
         <section className='gifts'>
           {giftsList.length ? (
-            giftsList.map(({ name, id }) => (
-              <Gift key={id} name={name} id={id} setGiftsList={setGiftsList} />
+            giftsList.map(({ name, id, quantity }) => (
+              <Gift
+                key={id}
+                name={name}
+                id={id}
+                quantity={quantity}
+                setGiftsList={setGiftsList}
+              />
             ))
           ) : (
             <p className='empty-list'>

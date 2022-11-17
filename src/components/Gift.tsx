@@ -1,12 +1,10 @@
 import { GiftType } from '../App'
 
-interface Props {
-  id: string
-  name: string
+interface Props extends GiftType {
   setGiftsList: React.Dispatch<React.SetStateAction<GiftType[]>>
 }
 
-export const Gift = ({ id, name, setGiftsList }: Props) => {
+export const Gift = ({ id, name, quantity, setGiftsList }: Props) => {
   const handleClickDelete = (id: string) => {
     setGiftsList((previousList) =>
       previousList.filter((gift) => gift.id !== id)
@@ -16,6 +14,7 @@ export const Gift = ({ id, name, setGiftsList }: Props) => {
   return (
     <article className='gift-article'>
       <h3>{name}</h3>
+      <span>{quantity}</span>
       <button onClick={() => handleClickDelete(id)}>X</button>
     </article>
   )
