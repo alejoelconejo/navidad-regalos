@@ -1,3 +1,4 @@
+import React from 'react'
 import { GiftType } from '../App'
 
 interface Props {
@@ -36,6 +37,15 @@ export const Form = ({ handleSubmit, handleChange, giftForm }: Props) => {
         placeholder='https://image.png'
         value={giftForm.image}
         onChange={handleChange}
+      />
+      <input
+        type='text'
+        name='addressee'
+        className='input-addressee'
+        placeholder='Destinatario'
+        value={giftForm.addressee}
+        onChange={handleChange}
+        required
       />
       <button>Agregar</button>
     </form>

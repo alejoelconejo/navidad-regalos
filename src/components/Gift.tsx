@@ -4,7 +4,14 @@ interface Props extends GiftType {
   setGiftsList: React.Dispatch<React.SetStateAction<GiftType[]>>
 }
 
-export const Gift = ({ id, name, quantity, image, setGiftsList }: Props) => {
+export const Gift = ({
+  id,
+  name,
+  quantity,
+  image,
+  addressee,
+  setGiftsList,
+}: Props) => {
   const handleClickDelete = (id: string) => {
     setGiftsList((previousList) =>
       previousList.filter((gift) => gift.id !== id)
@@ -22,6 +29,7 @@ export const Gift = ({ id, name, quantity, image, setGiftsList }: Props) => {
       />
       <h3>{name}</h3>
       <span>{quantity}</span>
+      <span>{addressee}</span>
       <button onClick={() => handleClickDelete(id)}>X</button>
     </article>
   )

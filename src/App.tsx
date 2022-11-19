@@ -3,12 +3,25 @@ import { Snowflakes } from './components/Snowflakes'
 import { nanoid } from 'nanoid'
 import { Gift } from './components/Gift'
 import { Form } from './components/Form'
+import Modal from 'react-modal'
 
 export interface GiftType {
   id: string
   name: string
   quantity: number
   image: string
+  addressee: string
+}
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
 }
 
 function App() {
@@ -21,7 +34,10 @@ function App() {
     id: nanoid(),
     quantity: 1,
     image: '',
+    addressee: '',
   })
+
+  const [modalIsOpen, setModalOpen] = useState(false)
 
   useEffect(() => {
     localStorage.setItem('giftsList', JSON.stringify(giftsList))
@@ -45,7 +61,14 @@ function App() {
       return
     }
     setGiftsList((previousList) => [...previousList, giftForm])
-    setGiftForm({ name: '', id: nanoid(), quantity: 1, image: '' })
+    setGiftForm({
+      name: '',
+      id: nanoid(),
+      quantity: 1,
+      image: '',
+      addressee: '',
+    })
+    setModalOpen(false)
   }
 
   return (
@@ -53,20 +76,29 @@ function App() {
       <Snowflakes />
       <main>
         <h1>🎁 ¡Regalos de Navidad!</h1>
-        <Form
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          giftForm={giftForm}
-        />
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalOpen(false)}
+          style={customStyles}
+          contentLabel='Example Modal'
+        >
+          <Form
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            giftForm={giftForm}
+          />
+        </Modal>
+        <button onClick={() => setModalOpen(true)}>Agregar regalo</button>
         <section className='gifts'>
           {giftsList.length ? (
-            giftsList.map(({ name, id, quantity, image }) => (
+            giftsList.map(({ name, id, quantity, image, addressee }) => (
               <Gift
                 key={id}
                 name={name}
                 id={id}
                 quantity={quantity}
                 image={image}
+                addressee={addressee}
                 setGiftsList={setGiftsList}
               />
             ))
