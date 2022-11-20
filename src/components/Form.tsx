@@ -5,11 +5,17 @@ interface Props {
   handleSubmit: React.FormEventHandler<HTMLFormElement>
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   giftForm: GiftType
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Form = ({ handleSubmit, handleChange, giftForm }: Props) => {
+export const Form = ({
+  handleSubmit,
+  handleChange,
+  giftForm,
+  setModalOpen,
+}: Props) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='form-gift' onSubmit={handleSubmit}>
       <input
         type='text'
         name='name'
@@ -24,7 +30,7 @@ export const Form = ({ handleSubmit, handleChange, giftForm }: Props) => {
       <input
         type='number'
         name='quantity'
-        className='input-quantity'
+        className='input-gift'
         value={giftForm.quantity}
         onChange={handleChange}
         min='1'
@@ -33,7 +39,7 @@ export const Form = ({ handleSubmit, handleChange, giftForm }: Props) => {
       <input
         type='text'
         name='image'
-        className='input-image'
+        className='input-gift'
         placeholder='https://image.png'
         value={giftForm.image}
         onChange={handleChange}
@@ -41,13 +47,18 @@ export const Form = ({ handleSubmit, handleChange, giftForm }: Props) => {
       <input
         type='text'
         name='addressee'
-        className='input-addressee'
+        className='input-gift'
         placeholder='Destinatario'
         value={giftForm.addressee}
         onChange={handleChange}
         required
       />
-      <button>Agregar</button>
+      <div className='form-buttons'>
+        <button className='form-close' onClick={() => setModalOpen(false)}>
+          Cerrar
+        </button>
+        <button className='form-save'>Guardar</button>
+      </div>
     </form>
   )
 }

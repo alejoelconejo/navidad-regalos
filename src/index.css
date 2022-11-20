@@ -129,14 +129,15 @@ main h1 {
   text-transform: uppercase;
 }
 
-form {
+.form-gift {
   width: 100%;
+  min-width: 400px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.input-gift {
+.form-gift input {
   flex: 1;
   background: whitesmoke;
   border-radius: 0.3rem;
@@ -145,18 +146,32 @@ form {
   font-size: var(--font-gifts);
 }
 
-.input-quantity {
-  background: whitesmoke;
-  color: black;
-  border-radius: 0.3rem;
-  max-width: 3rem;
-}
-
-form button {
+form button,
+.button-add-gift {
   background: green;
   padding: 0.6rem 1rem;
   border-radius: 0.3rem;
   text-transform: uppercase;
+  color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.form-buttons button {
+  width: 40%;
+}
+
+.form-close {
+  color: green;
+  background: transparent;
+  border: 1px solid green;
 }
 
 .gifts {

@@ -24,17 +24,22 @@ const customStyles = {
   },
 }
 
+const INITIAL_FORM = {
+  name: '',
+  id: nanoid(),
+  quantity: 1,
+  image: '',
+  addressee: '',
+}
+
 function App() {
   const [giftsList, setGiftsList] = useState<GiftType[]>(
     () => JSON.parse(localStorage.getItem('giftsList')!) || []
   )
 
   const [giftForm, setGiftForm] = useState<GiftType>({
-    name: '',
+    ...INITIAL_FORM,
     id: nanoid(),
-    quantity: 1,
-    image: '',
-    addressee: '',
   })
 
   const [modalIsOpen, setModalOpen] = useState(false)
@@ -52,24 +57,24 @@ function App() {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
-    if (
-      giftsList.find(
-        (gift) => gift.name.toLowerCase() === giftForm.name.toLowerCase()
+    if (giftsList.find((gift) => gift.id === giftForm.id)) {
+      setGiftsList((previousList) =>
+        previousList.filter((gift) => gift.id !== giftForm.id)
       )
-    ) {
-      window.alert('El regalo ya está en la lista. ¡Elegí otro!')
-      return
     }
     setGiftsList((previousList) => [...previousList, giftForm])
-    setGiftForm({
-      name: '',
-      id: nanoid(),
-      quantity: 1,
-      image: '',
-      addressee: '',
-    })
+    setGiftForm({ ...INITIAL_FORM, id: nanoid() })
     setModalOpen(false)
   }
+
+  const handleClickEdit = (id: string) => {
+    setGiftForm(giftsList.find((gift) => gift.id === id))
+    setModalOpen(true)
+  }
+
+  useEffect(() => {
+    Modal.setAppElement('body')
+  })
 
   return (
     <>
@@ -86,9 +91,12 @@ function App() {
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             giftForm={giftForm}
+            setModalOpen={setModalOpen}
           />
         </Modal>
-        <button onClick={() => setModalOpen(true)}>Agregar regalo</button>
+        <button className='button-add-gift' onClick={() => setModalOpen(true)}>
+          Agregar regalo
+        </button>
         <section className='gifts'>
           {giftsList.length ? (
             giftsList.map(({ name, id, quantity, image, addressee }) => (
@@ -100,6 +108,7 @@ function App() {
                 image={image}
                 addressee={addressee}
                 setGiftsList={setGiftsList}
+                handleClickEdit={handleClickEdit}
               />
             ))
           ) : (

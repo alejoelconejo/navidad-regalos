@@ -2,6 +2,7 @@ import { GiftType } from '../App'
 
 interface Props extends GiftType {
   setGiftsList: React.Dispatch<React.SetStateAction<GiftType[]>>
+  handleClickEdit: (id: string) => void
 }
 
 export const Gift = ({
@@ -11,6 +12,7 @@ export const Gift = ({
   image,
   addressee,
   setGiftsList,
+  handleClickEdit,
 }: Props) => {
   const handleClickDelete = (id: string) => {
     setGiftsList((previousList) =>
@@ -30,6 +32,7 @@ export const Gift = ({
       <h3>{name}</h3>
       <span>{quantity}</span>
       <span>{addressee}</span>
+      <button onClick={() => handleClickEdit(id)}>E</button>
       <button onClick={() => handleClickDelete(id)}>X</button>
     </article>
   )
