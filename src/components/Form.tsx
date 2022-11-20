@@ -5,14 +5,14 @@ interface Props {
   handleSubmit: React.FormEventHandler<HTMLFormElement>
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   giftForm: GiftType
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  toggleModal: () => void
 }
 
 export const Form = ({
   handleSubmit,
   handleChange,
   giftForm,
-  setModalOpen,
+  toggleModal,
 }: Props) => {
   return (
     <form className='form-gift' onSubmit={handleSubmit}>
@@ -54,7 +54,7 @@ export const Form = ({
         required
       />
       <div className='form-buttons'>
-        <button className='form-close' onClick={() => setModalOpen(false)}>
+        <button className='form-close' onClick={() => toggleModal()}>
           Cerrar
         </button>
         <button className='form-save'>Guardar</button>

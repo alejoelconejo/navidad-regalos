@@ -48,6 +48,10 @@ function App() {
     localStorage.setItem('giftsList', JSON.stringify(giftsList))
   }, [giftsList])
 
+  const toggleModal = () => {
+    setModalOpen(!modalIsOpen)
+  }
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setGiftForm((previousForm) => {
@@ -64,12 +68,23 @@ function App() {
     }
     setGiftsList((previousList) => [...previousList, giftForm])
     setGiftForm({ ...INITIAL_FORM, id: nanoid() })
-    setModalOpen(false)
+    toggleModal()
   }
 
   const handleClickEdit = (id: string) => {
     setGiftForm(giftsList.find((gift) => gift.id === id))
-    setModalOpen(true)
+    toggleModal()
+  }
+
+  const deleteItem = (id: string) => {
+    setGiftsList((previousList) =>
+      previousList.filter((gift) => gift.id !== id)
+    )
+  }
+
+  const handleModalClose = () => {
+    toggleModal()
+    setGiftForm({ ...INITIAL_FORM, id: nanoid() })
   }
 
   useEffect(() => {
@@ -83,7 +98,7 @@ function App() {
         <h1>🎁 ¡Regalos de Navidad!</h1>
         <Modal
           isOpen={modalIsOpen}
-          onRequestClose={() => setModalOpen(false)}
+          onRequestClose={handleModalClose}
           style={customStyles}
           contentLabel='Example Modal'
         >
@@ -91,7 +106,7 @@ function App() {
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             giftForm={giftForm}
-            setModalOpen={setModalOpen}
+            toggleModal={toggleModal}
           />
         </Modal>
         <button className='button-add-gift' onClick={() => setModalOpen(true)}>
@@ -107,7 +122,7 @@ function App() {
                 quantity={quantity}
                 image={image}
                 addressee={addressee}
-                setGiftsList={setGiftsList}
+                deleteItem={deleteItem}
                 handleClickEdit={handleClickEdit}
               />
             ))
