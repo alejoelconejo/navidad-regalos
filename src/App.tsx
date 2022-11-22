@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Snowflakes } from './components/Snowflakes'
-import { nanoid } from 'nanoid'
+import { nanoid, random } from 'nanoid'
 import { Gift } from './components/Gift'
 import { Form } from './components/Form'
 import Modal from 'react-modal'
@@ -31,6 +31,15 @@ const INITIAL_FORM = {
   image: '',
   addressee: '',
 }
+
+const randomGifts = [
+  'Medias',
+  'Bufanda',
+  'Pelota',
+  'Zapatillas',
+  'Zapatos',
+  'Vestido',
+]
 
 function App() {
   const [giftsList, setGiftsList] = useState<GiftType[]>(
@@ -82,6 +91,14 @@ function App() {
     )
   }
 
+  const getRandomGift = () => {
+    const randomGiftNum = Math.floor(Math.random() * randomGifts.length)
+    console.log(randomGifts[randomGiftNum])
+    setGiftForm((previousForm) => {
+      return { ...previousForm, name: randomGifts[randomGiftNum] }
+    })
+  }
+
   const handleModalClose = () => {
     toggleModal()
     setGiftForm({ ...INITIAL_FORM, id: nanoid() })
@@ -107,6 +124,7 @@ function App() {
             handleChange={handleChange}
             giftForm={giftForm}
             toggleModal={toggleModal}
+            getRandomGift={getRandomGift}
           />
         </Modal>
         <button className='button-add-gift' onClick={() => setModalOpen(true)}>

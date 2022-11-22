@@ -6,6 +6,7 @@ interface Props {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   giftForm: GiftType
   toggleModal: () => void
+  getRandomGift: () => void
 }
 
 export const Form = ({
@@ -13,20 +14,26 @@ export const Form = ({
   handleChange,
   giftForm,
   toggleModal,
+  getRandomGift,
 }: Props) => {
   return (
     <form className='form-gift' onSubmit={handleSubmit}>
-      <input
-        type='text'
-        name='name'
-        className='input-gift'
-        placeholder='Regalo'
-        maxLength={30}
-        value={giftForm.name}
-        onChange={handleChange}
-        required
-        autoFocus
-      />
+      <div className='form-name'>
+        <input
+          type='text'
+          name='name'
+          className='input-gift'
+          placeholder='Regalo'
+          maxLength={30}
+          value={giftForm.name}
+          onChange={handleChange}
+          required
+          autoFocus
+        />
+        <button onClick={getRandomGift} className='button-random'>
+          ¡Sorpréndeme!
+        </button>
+      </div>
       <input
         type='number'
         name='quantity'

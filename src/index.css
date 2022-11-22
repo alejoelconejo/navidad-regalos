@@ -153,9 +153,29 @@ form button,
   border-radius: 0.3rem;
   text-transform: uppercase;
   color: white;
-  width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.button-random {
+  text-transform: none;
+}
+
+.button-add-gift {
+  width: 100%;
+}
+
+.form-name {
+  display: flex;
+  gap: 1rem;
+}
+
+.button-add-gift:focus,
+.reset-button:focus,
+.gift-article button:focus,
+.form-buttons button:focus,
+.form-gift input:focus {
+  outline: 2px solid rgb(37, 37, 37);
 }
 
 .form-buttons {
