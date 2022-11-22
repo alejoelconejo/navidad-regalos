@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Snowflakes } from './components/Snowflakes'
-import { nanoid, random } from 'nanoid'
+import { nanoid } from 'nanoid'
 import { Gift } from './components/Gift'
 import { Form } from './components/Form'
 import Modal from 'react-modal'
@@ -9,6 +9,7 @@ export interface GiftType {
   id: string
   name: string
   quantity: number
+  price: number
   image: string
   addressee: string
 }
@@ -28,6 +29,7 @@ const INITIAL_FORM = {
   name: '',
   id: nanoid(),
   quantity: 1,
+  price: 0,
   image: '',
   addressee: '',
 }
@@ -85,6 +87,11 @@ function App() {
     toggleModal()
   }
 
+  const handleClickDuplicate = () => {
+    setGiftForm(giftsList.find((gift) => gift.id === id))
+    toggleModal()
+  }
+
   const deleteItem = (id: string) => {
     setGiftsList((previousList) =>
       previousList.filter((gift) => gift.id !== id)
@@ -102,6 +109,14 @@ function App() {
   const handleModalClose = () => {
     toggleModal()
     setGiftForm({ ...INITIAL_FORM, id: nanoid() })
+  }
+
+  const getTotalPrice = () => {
+    let result = 0
+    giftsList.forEach((gift) => {
+      result += gift.price * gift.quantity
+    })
+    return result
   }
 
   useEffect(() => {
@@ -127,21 +142,23 @@ function App() {
             getRandomGift={getRandomGift}
           />
         </Modal>
-        <button className='button-add-gift' onClick={() => setModalOpen(true)}>
+        <button className='button-add-gift' onClick={toggleModal}>
           Agregar regalo
         </button>
         <section className='gifts'>
           {giftsList.length ? (
-            giftsList.map(({ name, id, quantity, image, addressee }) => (
+            giftsList.map(({ name, id, quantity, price, image, addressee }) => (
               <Gift
                 key={id}
                 name={name}
                 id={id}
                 quantity={quantity}
+                price={price}
                 image={image}
                 addressee={addressee}
                 deleteItem={deleteItem}
                 handleClickEdit={handleClickEdit}
+                handleClickDuplicate={handleClickDuplicate}
               />
             ))
           ) : (
@@ -149,6 +166,7 @@ function App() {
               No hay regalos todavía... apurate a pedir el tuyo! ☝️
             </p>
           )}
+          <p>Total: {getTotalPrice()}</p>
         </section>
         <button className='reset-button' onClick={() => setGiftsList([])}>
           Borrar todo

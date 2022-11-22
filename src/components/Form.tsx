@@ -44,6 +44,14 @@ export const Form = ({
         required
       />
       <input
+        type='number'
+        name='price'
+        className='input-gift'
+        value={giftForm.price}
+        onChange={handleChange}
+        required
+      />
+      <input
         type='text'
         name='image'
         className='input-gift'

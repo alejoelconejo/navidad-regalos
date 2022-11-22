@@ -2,6 +2,7 @@ import { GiftType } from '../App'
 
 interface Props extends GiftType {
   handleClickEdit: (id: string) => void
+  handleClickDuplicate: (id: string) => void
   deleteItem: (id: string) => void
 }
 
@@ -9,11 +10,15 @@ export const Gift = ({
   id,
   name,
   quantity,
+  price,
   image,
   addressee,
   deleteItem,
   handleClickEdit,
+  handleClickDuplicate,
 }: Props) => {
+  const totalPrice = price * quantity
+
   return (
     <article className='gift-article'>
       <img
@@ -24,9 +29,11 @@ export const Gift = ({
         }
       />
       <h3>{name}</h3>
-      <span>{quantity}</span>
+      <span>x {quantity}</span>
+      <span>{totalPrice}</span>
       <span>{addressee}</span>
       <button onClick={() => handleClickEdit(id)}>E</button>
+      <button onClick={() => handleClickDuplicate(id)}>D</button>
       <button onClick={() => deleteItem(id)}>X</button>
     </article>
   )
