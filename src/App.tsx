@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Snowflakes } from './components/Snowflakes'
 import { nanoid } from 'nanoid'
 import { Gift } from './components/Gift'
 import { Form } from './components/Form'
 import Modal from 'react-modal'
+import ReactToPrint from 'react-to-print'
 
 export interface GiftType {
   id: string
@@ -55,6 +56,8 @@ function App() {
 
   const [modalIsOpen, setModalOpen] = useState(false)
 
+  const componentRef = useRef(null)
+
   useEffect(() => {
     localStorage.setItem('giftsList', JSON.stringify(giftsList))
   }, [giftsList])
@@ -83,12 +86,14 @@ function App() {
   }
 
   const handleClickEdit = (id: string) => {
-    setGiftForm(giftsList.find((gift) => gift.id === id))
+    const actualGift = giftsList.find((gift) => gift.id === id)
+    setGiftForm(actualGift)
     toggleModal()
   }
 
-  const handleClickDuplicate = () => {
-    setGiftForm(giftsList.find((gift) => gift.id === id))
+  const handleClickDuplicate = (id: string) => {
+    const actualGift = giftsList.find((gift) => gift.id === id)
+    setGiftForm({ ...actualGift, id: nanoid() })
     toggleModal()
   }
 
@@ -100,7 +105,6 @@ function App() {
 
   const getRandomGift = () => {
     const randomGiftNum = Math.floor(Math.random() * randomGifts.length)
-    console.log(randomGifts[randomGiftNum])
     setGiftForm((previousForm) => {
       return { ...previousForm, name: randomGifts[randomGiftNum] }
     })
@@ -145,7 +149,7 @@ function App() {
         <button className='button-add-gift' onClick={toggleModal}>
           Agregar regalo
         </button>
-        <section className='gifts'>
+        <section className='gifts' ref={componentRef}>
           {giftsList.length ? (
             giftsList.map(({ name, id, quantity, price, image, addressee }) => (
               <Gift
@@ -168,9 +172,15 @@ function App() {
           )}
           <p>Total: {getTotalPrice()}</p>
         </section>
-        <button className='reset-button' onClick={() => setGiftsList([])}>
-          Borrar todo
-        </button>
+        <div className='buttons-home-bottom'>
+          <button className='reset-button' onClick={() => setGiftsList([])}>
+            Borrar todo
+          </button>
+          <ReactToPrint
+            trigger={() => <button>Lista de compras</button>}
+            content={() => componentRef.current}
+          />
+        </div>
       </main>
     </>
   )

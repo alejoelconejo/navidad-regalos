@@ -231,10 +231,15 @@ form button,
   justify-content: center;
 }
 
-.reset-button {
+.buttons-home-bottom button {
   border: 1px solid white;
   border-radius: 0.3rem;
   padding: 0.4rem 0.8rem;
+}
+
+.buttons-home-bottom {
+  display: flex;
+  gap: 2rem;
 }
 
 .empty-list {
