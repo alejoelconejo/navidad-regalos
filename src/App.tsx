@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
+import Modal from 'react-modal'
+import ReactToPrint from 'react-to-print'
+
 import { Snowflakes } from './components/Snowflakes'
 import { nanoid } from 'nanoid'
 import { Gift } from './components/Gift'
 import { Form } from './components/Form'
-import Modal from 'react-modal'
-import ReactToPrint from 'react-to-print'
+import { MusicButton } from './components/MusicButton'
 
 export interface GiftType {
   id: string
@@ -131,7 +133,10 @@ function App() {
     <>
       <Snowflakes />
       <main>
-        <h1>🎁 ¡Regalos de Navidad!</h1>
+        <header>
+          <h1>🎁 ¡Regalos de Navidad!</h1>
+          <MusicButton />
+        </header>
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={handleModalClose}

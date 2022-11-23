@@ -129,6 +129,22 @@ main h1 {
   text-transform: uppercase;
 }
 
+header {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+header button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header button img {
+  height: 32px;
+}
+
 .form-gift {
   width: 100%;
   min-width: 400px;
