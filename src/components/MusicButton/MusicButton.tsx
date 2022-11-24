@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import musicMutedLogo from '../images/musicMuted.svg'
-import musicLogo from '../images/music.svg'
+import musicMutedLogo from '../../images/musicMuted.svg'
+import musicLogo from '../../images/music.svg'
+import './MusicButton.css'
 
 const audio = new Audio('/christmas.mp3')
 audio.muted = true

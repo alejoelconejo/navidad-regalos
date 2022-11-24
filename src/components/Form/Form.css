@@ -1,0 +1,41 @@
+.form-gift {
+  width: 100%;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-gift input {
+  flex: 1;
+  background: whitesmoke;
+  border-radius: 0.3rem;
+  color: black;
+  padding: 0.5rem 1rem;
+  font-size: var(--font-gifts);
+}
+
+.button-random {
+  text-transform: none;
+}
+
+.form-name {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.form-buttons button {
+  width: 40%;
+}
+
+.form-close {
+  color: green;
+  background: transparent;
+  border: 1px solid green;
+}

@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import Modal from 'react-modal'
 import ReactToPrint from 'react-to-print'
 
-import { Snowflakes } from './components/Snowflakes'
+import { Snowflakes } from './components/Snowflakes/Snowflakes'
 import { nanoid } from 'nanoid'
-import { Gift } from './components/Gift'
-import { Form } from './components/Form'
-import { MusicButton } from './components/MusicButton'
+import { Gift } from './components/Gift/Gift'
+import { Form } from './components/Form/Form'
+import { MusicButton } from './components/MusicButton/MusicButton'
 
 export interface GiftType {
   id: string

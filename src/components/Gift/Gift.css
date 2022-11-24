@@ -1,0 +1,24 @@
+.gift-article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gift-article img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.gift-article button {
+  cursor: pointer;
+  background: var(--bg-main-color);
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

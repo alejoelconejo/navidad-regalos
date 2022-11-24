@@ -1,80 +1,57 @@
-/***
-    The new CSS reset - version 1.7.3 (last updated 7.8.2022)
-    GitHub page: https://github.com/elad2412/the-new-css-reset
-***/
-
-/*
-    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
-    - The "symbol *" part is to solve Firefox SVG sprite bug
- */
 *:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol
       *)) {
   all: unset;
   display: revert;
 }
 
-/* Preferred box-sizing value */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Reapply the pointer cursor for anchor tags */
 a,
 button {
   cursor: revert;
 }
 
-/* Remove list styles (bullets/numbers) */
 ol,
 ul,
 menu {
   list-style: none;
 }
 
-/* For images to not be able to exceed their container */
 img {
   max-width: 100%;
 }
 
-/* removes spacing between cells in tables */
 table {
   border-collapse: collapse;
 }
 
-/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
 input,
 textarea {
   user-select: auto;
   -webkit-user-select: auto;
 }
 
-/* revert the 'white-space' property for textarea elements on Safari */
 textarea {
   white-space: revert;
 }
 
-/* minimum style to allow to style meter element */
 meter {
   -webkit-appearance: revert;
   appearance: revert;
 }
 
-/* reset default text opacity of input placeholder */
 ::placeholder {
   color: unset;
 }
 
-/* fix the feature of 'hidden' attribute.
- display:revert; revert to element instead of attribute */
 :where([hidden]) {
   display: none;
 }
 
-/* revert for bug in Chromium browsers
- - fix for the content editable attribute will work properly.
- - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
 :where([contenteditable]:not([contenteditable='false'])) {
   -moz-user-modify: read-write;
   -webkit-user-modify: read-write;
@@ -85,7 +62,6 @@ meter {
   -webkit-user-select: auto;
 }
 
-/* apply back the draggable feature - exist only in Chromium and Safari */
 :where([draggable='true']) {
   -webkit-user-drag: element;
 }
@@ -135,33 +111,6 @@ header {
   align-items: center;
 }
 
-header button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-header button img {
-  height: 32px;
-}
-
-.form-gift {
-  width: 100%;
-  min-width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-gift input {
-  flex: 1;
-  background: whitesmoke;
-  border-radius: 0.3rem;
-  color: black;
-  padding: 0.5rem 1rem;
-  font-size: var(--font-gifts);
-}
-
 form button,
 .button-add-gift {
   background: green;
@@ -173,41 +122,16 @@ form button,
   justify-content: center;
 }
 
-.button-random {
-  text-transform: none;
-}
-
 .button-add-gift {
   width: 100%;
 }
 
-.form-name {
-  display: flex;
-  gap: 1rem;
-}
-
 .button-add-gift:focus,
-.reset-button:focus,
+.buttons-home-bottom button:focus,
 .gift-article button:focus,
 .form-buttons button:focus,
 .form-gift input:focus {
   outline: 2px solid rgb(37, 37, 37);
-}
-
-.form-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-}
-
-.form-buttons button {
-  width: 40%;
-}
-
-.form-close {
-  color: green;
-  background: transparent;
-  border: 1px solid green;
 }
 
 .gifts {
@@ -220,31 +144,6 @@ form button,
   padding: 1rem 2rem;
   background: #fafafa;
   color: black;
-}
-
-.gift-article {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.gift-article img {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-}
-
-.gift-article button {
-  cursor: pointer;
-  background: var(--bg-main-color);
-  color: white;
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  border-radius: 50%;
-  aspect-ratio: 1/1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .buttons-home-bottom button {
@@ -261,132 +160,4 @@ form button,
 .empty-list {
   font-size: 1.4rem;
   color: rgb(73, 73, 73);
-}
-
-/***
-Background snowflakes
-***/
-
-.snowflake {
-  color: #fff;
-  font-size: 1em;
-  font-family: Arial, sans-serif;
-  text-shadow: 0 0 5px #000;
-}
-
-@-webkit-keyframes snowflakes-fall {
-  0% {
-    top: -10%;
-  }
-  100% {
-    top: 100%;
-  }
-}
-@-webkit-keyframes snowflakes-shake {
-  0%,
-  100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-  50% {
-    -webkit-transform: translateX(80px);
-    transform: translateX(80px);
-  }
-}
-@keyframes snowflakes-fall {
-  0% {
-    top: -10%;
-  }
-  100% {
-    top: 100%;
-  }
-}
-@keyframes snowflakes-shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(80px);
-  }
-}
-.snowflake {
-  position: fixed;
-  top: -10%;
-  z-index: 9999;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: default;
-  -webkit-animation-name: snowflakes-fall, snowflakes-shake;
-  -webkit-animation-duration: 10s, 3s;
-  -webkit-animation-timing-function: linear, ease-in-out;
-  -webkit-animation-iteration-count: infinite, infinite;
-  -webkit-animation-play-state: running, running;
-  animation-name: snowflakes-fall, snowflakes-shake;
-  animation-duration: 10s, 3s;
-  animation-timing-function: linear, ease-in-out;
-  animation-iteration-count: infinite, infinite;
-  animation-play-state: running, running;
-}
-.snowflake:nth-of-type(0) {
-  left: 1%;
-  -webkit-animation-delay: 0s, 0s;
-  animation-delay: 0s, 0s;
-}
-.snowflake:nth-of-type(1) {
-  left: 10%;
-  -webkit-animation-delay: 1s, 1s;
-  animation-delay: 1s, 1s;
-}
-.snowflake:nth-of-type(2) {
-  left: 20%;
-  -webkit-animation-delay: 6s, 0.5s;
-  animation-delay: 6s, 0.5s;
-}
-.snowflake:nth-of-type(3) {
-  left: 30%;
-  -webkit-animation-delay: 4s, 2s;
-  animation-delay: 4s, 2s;
-}
-.snowflake:nth-of-type(4) {
-  left: 40%;
-  -webkit-animation-delay: 2s, 2s;
-  animation-delay: 2s, 2s;
-}
-.snowflake:nth-of-type(5) {
-  left: 50%;
-  -webkit-animation-delay: 8s, 3s;
-  animation-delay: 8s, 3s;
-}
-.snowflake:nth-of-type(6) {
-  left: 60%;
-  -webkit-animation-delay: 6s, 2s;
-  animation-delay: 6s, 2s;
-}
-.snowflake:nth-of-type(7) {
-  left: 70%;
-  -webkit-animation-delay: 2.5s, 1s;
-  animation-delay: 2.5s, 1s;
-}
-.snowflake:nth-of-type(8) {
-  left: 80%;
-  -webkit-animation-delay: 1s, 0s;
-  animation-delay: 1s, 0s;
-}
-.snowflake:nth-of-type(9) {
-  left: 90%;
-  -webkit-animation-delay: 3s, 1.5s;
-  animation-delay: 3s, 1.5s;
-}
-.snowflake:nth-of-type(10) {
-  left: 25%;
-  -webkit-animation-delay: 2s, 0s;
-  animation-delay: 2s, 0s;
-}
-.snowflake:nth-of-type(11) {
-  left: 65%;
-  -webkit-animation-delay: 4s, 2.5s;
-  animation-delay: 4s, 2.5s;
 }

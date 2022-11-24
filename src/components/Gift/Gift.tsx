@@ -1,4 +1,5 @@
-import { GiftType } from '../App'
+import { GiftType } from '../../App'
+import './Gift.css'
 
 interface Props extends GiftType {
   handleClickEdit: (id: string) => void

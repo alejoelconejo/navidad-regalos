@@ -1,5 +1,6 @@
 import React from 'react'
-import { GiftType } from '../App'
+import { GiftType } from '../../App'
+import './Form.css'
 
 interface Props {
   handleSubmit: React.FormEventHandler<HTMLFormElement>

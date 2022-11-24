@@ -1,3 +1,5 @@
+import './Snowflakes.css'
+
 export const Snowflakes = () => {
   return (
     <div className='snowflakes' aria-hidden='true'>

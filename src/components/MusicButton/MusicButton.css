@@ -1,0 +1,9 @@
+header button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header button img {
+  height: 32px;
+}
