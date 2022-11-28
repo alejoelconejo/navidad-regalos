@@ -5,16 +5,16 @@ import './Form.css'
 interface Props {
   handleSubmit: React.FormEventHandler<HTMLFormElement>
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleModalClose: () => void
   giftForm: GiftType
-  toggleModal: () => void
   getRandomGift: () => void
 }
 
 export const Form = ({
   handleSubmit,
   handleChange,
+  handleModalClose,
   giftForm,
-  toggleModal,
   getRandomGift,
 }: Props) => {
   return (
@@ -34,7 +34,11 @@ export const Form = ({
               required
               autoFocus
             />
-            <button onClick={getRandomGift} className='button-random'>
+            <button
+              onClick={getRandomGift}
+              type='button'
+              className='button-random'
+            >
               ¡Sorpréndeme!
             </button>
           </div>
@@ -87,10 +91,16 @@ export const Form = ({
         />
       </label>
       <div className='form-buttons'>
-        <button className='form-close' onClick={() => toggleModal()}>
+        <button
+          className='form-close'
+          type='button'
+          onClick={() => handleModalClose()}
+        >
           Cerrar
         </button>
-        <button className='form-save'>Guardar</button>
+        <button className='form-save' type='submit'>
+          Guardar
+        </button>
       </div>
     </form>
   )

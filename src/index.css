@@ -141,7 +141,7 @@ form button,
   border-radius: 0.3rem;
   font-size: var(--font-gifts);
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem;
   background: #fafafa;
   color: black;
 }

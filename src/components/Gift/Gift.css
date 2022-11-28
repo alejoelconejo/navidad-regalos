@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #ffeded;
+  padding: 1rem;
+  border-radius: 0.25rem;
 }
 
 .gift-data img {
@@ -9,6 +12,7 @@
   height: 64px;
   object-fit: cover;
   flex-shrink: 0;
+  border: 1px solid white;
 }
 
 .gift-data {

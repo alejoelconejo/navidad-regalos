@@ -30,6 +30,10 @@
   gap: 1rem;
 }
 
+.form-name label {
+  width: 100%;
+}
+
 .form-name-input {
   display: flex;
   gap: 1rem;

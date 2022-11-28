@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Modal from 'react-modal'
 import ReactToPrint from 'react-to-print'
 
@@ -8,6 +8,9 @@ import { Gift } from './components/Gift/Gift'
 import { Form } from './components/Form/Form'
 import { MusicButton } from './components/MusicButton/MusicButton'
 import { useModal } from './hooks/useModal'
+import { useGifts } from './hooks/useGifts'
+import { getTotalPrice } from './utils/getTotalPrice'
+import { useForm } from './hooks/useForm'
 
 export interface GiftType {
   id: string
@@ -16,17 +19,6 @@ export interface GiftType {
   price: number
   image: string
   addressee: string
-}
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
 }
 
 const INITIAL_FORM = {
@@ -38,32 +30,14 @@ const INITIAL_FORM = {
   addressee: '',
 }
 
-const randomGifts = [
-  'Medias',
-  'Bufanda',
-  'Pelota',
-  'Zapatillas',
-  'Zapatos',
-  'Vestido',
-]
-
 function App() {
-  const [giftsList, setGiftsList] = useState<GiftType[]>(
-    () => JSON.parse(localStorage.getItem('giftsList')!) || []
-  )
+  const [giftsList, setGiftsList, { deleteItem }] = useGifts()
 
-  const [giftForm, setGiftForm] = useState<GiftType>({
-    ...INITIAL_FORM,
-    id: nanoid(),
-  })
+  const [giftForm, setGiftForm, { getRandomGift, submitForm }] = useForm()
 
   const [modalIsOpen, toggleModal] = useModal(false)
 
   const giftsRef = useRef(null)
-
-  useEffect(() => {
-    localStorage.setItem('giftsList', JSON.stringify(giftsList))
-  }, [giftsList])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -73,14 +47,7 @@ function App() {
   }
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault()
-    if (giftsList.find((gift) => gift.id === giftForm.id)) {
-      setGiftsList((previousList) =>
-        previousList.filter((gift) => gift.id !== giftForm.id)
-      )
-    }
-    setGiftsList((previousList) => [...previousList, giftForm])
-    setGiftForm({ ...INITIAL_FORM, id: nanoid() })
+    submitForm(event, giftsList, setGiftsList)
     toggleModal()
   }
 
@@ -96,30 +63,9 @@ function App() {
     toggleModal()
   }
 
-  const deleteItem = (id: string) => {
-    setGiftsList((previousList) =>
-      previousList.filter((gift) => gift.id !== id)
-    )
-  }
-
-  const getRandomGift = () => {
-    const randomGiftNum = Math.floor(Math.random() * randomGifts.length)
-    setGiftForm((previousForm) => {
-      return { ...previousForm, name: randomGifts[randomGiftNum] }
-    })
-  }
-
   const handleModalClose = () => {
     toggleModal()
     setGiftForm({ ...INITIAL_FORM, id: nanoid() })
-  }
-
-  const getTotalPrice = () => {
-    let result = 0
-    giftsList.forEach((gift) => {
-      result += gift.price * gift.quantity
-    })
-    return result
   }
 
   useEffect(() => {
@@ -138,15 +84,14 @@ function App() {
           isOpen={modalIsOpen}
           onRequestClose={handleModalClose}
           contentLabel='Gift Form'
-          // style={customStyles}
           className='modal'
           overlayClassName='modal-overlay'
         >
           <Form
             handleSubmit={handleSubmit}
             handleChange={handleChange}
+            handleModalClose={handleModalClose}
             giftForm={giftForm}
-            toggleModal={toggleModal}
             getRandomGift={getRandomGift}
           />
         </Modal>
@@ -169,7 +114,7 @@ function App() {
               No hay regalos todavía... apurate a pedir el tuyo! ☝️
             </p>
           )}
-          <p className='gifts-total'>Total: ${getTotalPrice()}</p>
+          <p className='gifts-total'>Total: ${getTotalPrice(giftsList)}</p>
         </section>
         <div className='buttons-home-bottom'>
           <button className='reset-button' onClick={() => setGiftsList([])}>
