@@ -1,19 +1,23 @@
-import { GiftType } from '../../App'
 import './Gift.css'
 
-interface Props extends GiftType {
+export interface GiftType {
+  id: string
+  name: string
+  quantity: number
+  price: number
+  image: string
+  addressee: string
+}
+
+interface Props {
+  gift: GiftType
   handleClickEdit: (id: string) => void
   handleClickDuplicate: (id: string) => void
   deleteItem: (id: string) => void
 }
 
 export const Gift = ({
-  id,
-  name,
-  quantity,
-  price,
-  image,
-  addressee,
+  gift: { price, quantity, image, name, addressee, id },
   deleteItem,
   handleClickEdit,
   handleClickDuplicate,
