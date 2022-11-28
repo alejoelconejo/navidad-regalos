@@ -1,16 +1,44 @@
-.gift-article {
+.gift-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.gift-article img {
+.gift-data img {
   width: 64px;
   height: 64px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
-.gift-article button {
+.gift-data {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.gift-description {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.gift-quantity {
+  font-size: 1.4rem;
+}
+
+.gift-addressee {
+  color: gray;
+  font-size: 1.4rem;
+}
+
+.gift-actions {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.gift-actions button {
   cursor: pointer;
   background: var(--bg-main-color);
   color: white;
@@ -21,4 +49,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .gift-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .gift-data {
+    align-items: flex-start;
+  }
 }

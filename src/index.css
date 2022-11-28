@@ -146,10 +146,16 @@ form button,
   color: black;
 }
 
+.gifts-total {
+  text-align: end;
+  font-size: 1.8rem;
+}
+
 .buttons-home-bottom button {
   border: 1px solid white;
   border-radius: 0.3rem;
   padding: 0.4rem 0.8rem;
+  text-align: center;
 }
 
 .buttons-home-bottom {
@@ -160,4 +166,50 @@ form button,
 .empty-list {
   font-size: 1.4rem;
   color: rgb(73, 73, 73);
+}
+
+.modal {
+  background: #fafafa;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  inset: 0px;
+  margin: auto;
+  height: fit-content;
+  max-width: 600px;
+  position: absolute;
+  padding: 1rem;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0px;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 0;
+  }
+  main {
+    padding: 2rem 1rem;
+  }
+  .gifts {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .modal {
+    max-width: 100%;
+  }
+  .form-gift {
+    min-width: 0;
+  }
+  .form-name-input {
+    flex-direction: column;
+  }
+  .form-name label {
+    width: 100%;
+  }
+  .gift-actions {
+    margin-left: auto;
+  }
 }

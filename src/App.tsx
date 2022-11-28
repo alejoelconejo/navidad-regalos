@@ -137,8 +137,10 @@ function App() {
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={handleModalClose}
-          style={customStyles}
-          contentLabel='Example Modal'
+          contentLabel='Gift Form'
+          // style={customStyles}
+          className='modal'
+          overlayClassName='modal-overlay'
         >
           <Form
             handleSubmit={handleSubmit}
@@ -167,7 +169,7 @@ function App() {
               No hay regalos todavía... apurate a pedir el tuyo! ☝️
             </p>
           )}
-          <p>Total: {getTotalPrice()}</p>
+          <p className='gifts-total'>Total: ${getTotalPrice()}</p>
         </section>
         <div className='buttons-home-bottom'>
           <button className='reset-button' onClick={() => setGiftsList([])}>

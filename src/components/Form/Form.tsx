@@ -20,55 +20,72 @@ export const Form = ({
   return (
     <form className='form-gift' onSubmit={handleSubmit}>
       <div className='form-name'>
+        <label>
+          Regalo
+          <div className='form-name-input'>
+            <input
+              type='text'
+              name='name'
+              className='input-gift'
+              placeholder='Nombre'
+              maxLength={30}
+              value={giftForm.name}
+              onChange={handleChange}
+              required
+              autoFocus
+            />
+            <button onClick={getRandomGift} className='button-random'>
+              ¡Sorpréndeme!
+            </button>
+          </div>
+        </label>
+      </div>
+      <label>
+        Cantidad
         <input
-          type='text'
-          name='name'
+          type='number'
+          name='quantity'
           className='input-gift'
-          placeholder='Regalo'
-          maxLength={30}
-          value={giftForm.name}
+          value={giftForm.quantity}
+          onChange={handleChange}
+          min='1'
+          required
+        />
+      </label>
+      <label>
+        Precio
+        <input
+          type='number'
+          name='price'
+          className='input-gift'
+          value={giftForm.price}
           onChange={handleChange}
           required
-          autoFocus
         />
-        <button onClick={getRandomGift} className='button-random'>
-          ¡Sorpréndeme!
-        </button>
-      </div>
-      <input
-        type='number'
-        name='quantity'
-        className='input-gift'
-        value={giftForm.quantity}
-        onChange={handleChange}
-        min='1'
-        required
-      />
-      <input
-        type='number'
-        name='price'
-        className='input-gift'
-        value={giftForm.price}
-        onChange={handleChange}
-        required
-      />
-      <input
-        type='text'
-        name='image'
-        className='input-gift'
-        placeholder='https://image.png'
-        value={giftForm.image}
-        onChange={handleChange}
-      />
-      <input
-        type='text'
-        name='addressee'
-        className='input-gift'
-        placeholder='Destinatario'
-        value={giftForm.addressee}
-        onChange={handleChange}
-        required
-      />
+      </label>
+      <label>
+        Imagen
+        <input
+          type='text'
+          name='image'
+          className='input-gift'
+          placeholder='https://image.png'
+          value={giftForm.image}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Destinatario
+        <input
+          type='text'
+          name='addressee'
+          className='input-gift'
+          placeholder='Nombre'
+          value={giftForm.addressee}
+          onChange={handleChange}
+          required
+        />
+      </label>
       <div className='form-buttons'>
         <button className='form-close' onClick={() => toggleModal()}>
           Cerrar
