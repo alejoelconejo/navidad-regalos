@@ -7,6 +7,7 @@ import { nanoid } from 'nanoid'
 import { Gift } from './components/Gift/Gift'
 import { Form } from './components/Form/Form'
 import { MusicButton } from './components/MusicButton/MusicButton'
+import { useModal } from './hooks/useModal'
 
 export interface GiftType {
   id: string
@@ -56,17 +57,13 @@ function App() {
     id: nanoid(),
   })
 
-  const [modalIsOpen, setModalOpen] = useState(false)
+  const [modalIsOpen, toggleModal] = useModal(false)
 
-  const componentRef = useRef(null)
+  const giftsRef = useRef(null)
 
   useEffect(() => {
     localStorage.setItem('giftsList', JSON.stringify(giftsList))
   }, [giftsList])
-
-  const toggleModal = () => {
-    setModalOpen(!modalIsOpen)
-  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -89,13 +86,13 @@ function App() {
 
   const handleClickEdit = (id: string) => {
     const actualGift = giftsList.find((gift) => gift.id === id)
-    setGiftForm(actualGift)
+    setGiftForm(actualGift!)
     toggleModal()
   }
 
   const handleClickDuplicate = (id: string) => {
     const actualGift = giftsList.find((gift) => gift.id === id)
-    setGiftForm({ ...actualGift, id: nanoid() })
+    setGiftForm({ ...actualGift!, id: nanoid() })
     toggleModal()
   }
 
@@ -154,20 +151,15 @@ function App() {
         <button className='button-add-gift' onClick={toggleModal}>
           Agregar regalo
         </button>
-        <section className='gifts' ref={componentRef}>
+        <section className='gifts' ref={giftsRef}>
           {giftsList.length ? (
-            giftsList.map(({ name, id, quantity, price, image, addressee }) => (
+            giftsList.map((gift) => (
               <Gift
-                key={id}
-                name={name}
-                id={id}
-                quantity={quantity}
-                price={price}
-                image={image}
-                addressee={addressee}
+                key={gift.id}
                 deleteItem={deleteItem}
                 handleClickEdit={handleClickEdit}
                 handleClickDuplicate={handleClickDuplicate}
+                gift={gift}
               />
             ))
           ) : (
@@ -183,7 +175,7 @@ function App() {
           </button>
           <ReactToPrint
             trigger={() => <button>Lista de compras</button>}
-            content={() => componentRef.current}
+            content={() => giftsRef.current}
           />
         </div>
       </main>
