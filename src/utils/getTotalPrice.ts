@@ -1,4 +1,4 @@
-import { GiftType } from '../App'
+import { GiftType } from '../components/Gift/Gift'
 
 export const getTotalPrice = (list: GiftType[]) => {
   let result = 0
