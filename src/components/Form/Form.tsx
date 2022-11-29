@@ -1,5 +1,5 @@
 import React from 'react'
-import { GiftType } from '../../App'
+import { GiftType } from '../Gift/Gift'
 import './Form.css'
 
 interface Props {

@@ -10,25 +10,7 @@ import { MusicButton } from './components/MusicButton/MusicButton'
 import { useModal } from './hooks/useModal'
 import { useGifts } from './hooks/useGifts'
 import { getTotalPrice } from './utils/getTotalPrice'
-import { useForm } from './hooks/useForm'
-
-export interface GiftType {
-  id: string
-  name: string
-  quantity: number
-  price: number
-  image: string
-  addressee: string
-}
-
-const INITIAL_FORM = {
-  name: '',
-  id: nanoid(),
-  quantity: 1,
-  price: 0,
-  image: '',
-  addressee: '',
-}
+import { INITIAL_FORM, useForm } from './hooks/useForm'
 
 function App() {
   const [giftsList, setGiftsList, { deleteItem }] = useGifts()

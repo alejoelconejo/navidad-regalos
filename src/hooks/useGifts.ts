@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { GiftType } from '../App'
+import { GiftType } from '../components/Gift/Gift'
 
 interface giftActions {
   deleteItem: (id: string) => void

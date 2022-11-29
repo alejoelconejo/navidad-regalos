@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 import { useState } from 'react'
-import { GiftType } from '../App'
+import { GiftType } from '../components/Gift/Gift'
 
 import randomGifts from '../data/randomGifts.json'
 
@@ -17,7 +17,7 @@ interface useForm {
   (): [GiftType, React.Dispatch<React.SetStateAction<GiftType>>, formActions]
 }
 
-const INITIAL_FORM = {
+export const INITIAL_FORM = {
   name: '',
   id: nanoid(),
   quantity: 1,
