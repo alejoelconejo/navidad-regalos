@@ -5,6 +5,7 @@
   background: #edf1ff;
   padding: 1rem;
   border-radius: 0.25rem;
+  border: 1px solid #dad9e3;
 }
 
 .gift-data img {
@@ -26,6 +27,7 @@
   gap: 1rem;
   align-items: center;
   flex-wrap: wrap;
+  line-height: 1.5rem;
 }
 
 .gift-quantity {
@@ -35,6 +37,12 @@
 .gift-addressee {
   color: gray;
   font-size: 1.4rem;
+}
+
+.text-ellipsis {
+  max-width: 130px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .gift-actions {
@@ -53,6 +61,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.05s;
+}
+
+.gift-actions button:hover {
+  background: #c62222;
 }
 
 @media (max-width: 640px) {

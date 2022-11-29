@@ -21,27 +21,10 @@ menu {
   list-style: none;
 }
 
-img {
-  max-width: 100%;
-}
-
-table {
-  border-collapse: collapse;
-}
-
 input,
 textarea {
   user-select: auto;
   -webkit-user-select: auto;
-}
-
-textarea {
-  white-space: revert;
-}
-
-meter {
-  -webkit-appearance: revert;
-  appearance: revert;
 }
 
 ::placeholder {
@@ -52,26 +35,13 @@ meter {
   display: none;
 }
 
-:where([contenteditable]:not([contenteditable='false'])) {
-  -moz-user-modify: read-write;
-  -webkit-user-modify: read-write;
-  overflow-wrap: break-word;
-  line-break: after-white-space;
-  user-select: auto;
-  -webkit-line-break: after-white-space;
-  -webkit-user-select: auto;
-}
-
-:where([draggable='true']) {
-  -webkit-user-drag: element;
-}
-
 :root {
   --bg-body-color: #fafafa;
   --bg-main-color: #e31e1e;
   --font-color: #fafafa;
   --main-width: 600px;
   --font-gifts: 1.6rem;
+  --btn-primary: green;
 }
 
 button {
@@ -97,6 +67,7 @@ main {
   max-width: var(--main-width);
   padding: 1.5rem 3rem;
   color: var(--font-color);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 main h1 {
@@ -113,23 +84,29 @@ header {
 
 form button,
 .button-add-gift {
-  background: green;
+  background: var(--btn-primary);
   padding: 0.6rem 1rem;
   border-radius: 0.3rem;
   text-transform: uppercase;
   color: white;
   display: flex;
   justify-content: center;
+  transition: background 0.05s;
 }
 
 .button-add-gift {
   width: 100%;
 }
 
+form button:hover,
+.button-add-gift:hover {
+  background: #017101;
+}
+
 .button-add-gift:focus,
 .buttons-home-bottom button:focus,
-.gift-article button:focus,
-.form-buttons button:focus,
+.gift-item button:focus,
+.form-gift button:focus,
 .form-gift input:focus {
   outline: 2px solid rgb(37, 37, 37);
 }
@@ -151,16 +128,21 @@ form button,
   font-size: 1.8rem;
 }
 
+.buttons-home-bottom {
+  display: flex;
+  gap: 2rem;
+}
+
 .buttons-home-bottom button {
   border: 1px solid white;
   border-radius: 0.3rem;
   padding: 0.4rem 0.8rem;
   text-align: center;
+  transition: background 0.05s;
 }
 
-.buttons-home-bottom {
-  display: flex;
-  gap: 2rem;
+.buttons-home-bottom button:hover {
+  background: #c62222;
 }
 
 .empty-list {
@@ -192,6 +174,7 @@ form button,
   }
   main {
     padding: 2rem 1rem;
+    border-radius: 0;
   }
   .gifts {
     gap: 1.5rem;

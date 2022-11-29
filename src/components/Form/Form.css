@@ -50,7 +50,11 @@
 }
 
 .form-close {
-  color: green;
+  color: var(--btn-primary);
   background: transparent;
   border: 1px solid green;
+}
+
+.form-close:hover {
+  background-color: rgb(245, 245, 245);
 }

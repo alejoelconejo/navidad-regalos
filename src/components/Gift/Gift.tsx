@@ -37,11 +37,11 @@ export const Gift = ({
         />
         <div>
           <div className='gift-description'>
-            <h3>{name}</h3>
+            <h3 className='text-ellipsis'>{name}</h3>
             <span className='gift-quantity'>(x {quantity})</span>
             <span>${totalPrice}</span>
           </div>
-          <div className='gift-addressee'>
+          <div className='gift-addressee text-ellipsis'>
             <span>{addressee}</span>
           </div>
         </div>
