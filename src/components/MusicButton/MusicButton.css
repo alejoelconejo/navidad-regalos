@@ -8,3 +8,8 @@ header button img {
   height: 32px;
   width: 32px;
 }
+
+.music-controls {
+  height: 16px;
+  width: 16px;
+}
