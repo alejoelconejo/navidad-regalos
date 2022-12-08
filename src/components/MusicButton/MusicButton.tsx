@@ -15,8 +15,8 @@ export const MusicButton = () => {
   audio.muted = isAudioMuted
 
   return (
-    <button onClick={() => toggleMute(!isAudioMuted)}>
-      <img src={audio.muted ? musicMutedLogo : musicLogo} />
+    <button aria-label='Music' onClick={() => toggleMute(!isAudioMuted)}>
+      <img alt='music logo' src={audio.muted ? musicMutedLogo : musicLogo} />
     </button>
   )
 }
