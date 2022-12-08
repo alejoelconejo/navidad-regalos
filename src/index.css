@@ -1,5 +1,6 @@
-*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol
-      *)) {
+*:where(
+    :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
+  ) {
   all: unset;
   display: revert;
 }
@@ -175,6 +176,7 @@ form button:hover,
   main {
     padding: 2rem 1rem;
     border-radius: 0;
+    min-height: 100vh;
   }
   .gifts {
     gap: 1.5rem;
